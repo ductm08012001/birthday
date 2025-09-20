@@ -36,7 +36,7 @@ const FallingText = forwardRef<FallingTextRef, Props>(({ onFinish }, ref) => {
         stagger: 0.05,
         onComplete: () => {
           finishedRef.current = true;
-          onFinish?.(); // báo về cha
+          onFinish?.(); 
         },
       }
     );

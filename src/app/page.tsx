@@ -20,7 +20,7 @@ export default function BackgroundGallery() {
         return (
           <>
             <HeartFlip />
-            <p className="text-[32px] mt-2">Happy Birthday</p>
+            <p className="text-[32px] mt-2 text-[#373737]">Happy Birthday</p>
             <p className="font-carattere text-[120px] text-[#424242]">
               Trương Thảo Vy
             </p>
@@ -63,7 +63,14 @@ export default function BackgroundGallery() {
       case 2:
         return (
           <>
-            <p className="font-carattere text-[72px] text-[#424242]">
+            <Image
+              src={"/bgLastSection.png"}
+              alt="dino"
+              width={941}
+              height={566}
+              className="absolute inset-0 rounded-[30px]"
+            />
+            <p className="font-carattere relative z-[2] text-[72px] text-[#424242]">
               Love youuuuuu
             </p>
           </>
