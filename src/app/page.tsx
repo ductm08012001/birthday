@@ -95,7 +95,10 @@ export default function BackgroundGallery() {
         fireworks.start();
       },
       onComplete: () => {
-        setStep((prev) => prev + 1);
+        setStep((prev) => {
+          if (prev === 2) return 0;
+          return prev + 1;
+        });
       },
     })
       .to({}, { duration: 5 })
