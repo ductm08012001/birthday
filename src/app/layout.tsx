@@ -47,7 +47,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sinh nhật bé Vy",
     description: "Chúc mừng sinh nhật Vy",
-    images: ["/meta.png"],
+    images: [
+      {
+        url: "/meta.png",
+        width: 800,
+        height: 600,
+      },
+    ],
   },
 };
 
