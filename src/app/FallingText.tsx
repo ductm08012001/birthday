@@ -1,9 +1,24 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import gsap from "gsap";
 
-export default function FallingText() {
+export type FallingTextRef = {
+  isFinished: boolean;
+};
+
+type Props = {
+  onFinish?: () => void;
+};
+
+const FallingText = forwardRef<FallingTextRef, Props>(({ onFinish }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const finishedRef = useRef(false);
+
+  useImperativeHandle(ref, () => ({
+    get isFinished() {
+      return finishedRef.current;
+    },
+  }));
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -19,9 +34,13 @@ export default function FallingText() {
         duration: 0.3,
         ease: "bounce.out",
         stagger: 0.05,
+        onComplete: () => {
+          finishedRef.current = true;
+          onFinish?.(); // báo về cha
+        },
       }
     );
-  }, []);
+  }, [onFinish]);
 
   const paragraphs = [
     `Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum,
@@ -58,4 +77,7 @@ export default function FallingText() {
       ))}
     </div>
   );
-}
+});
+
+FallingText.displayName = "FallingText";
+export default FallingText;

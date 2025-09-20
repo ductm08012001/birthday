@@ -3,7 +3,7 @@ import Fireworks from "fireworks-js";
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import FallingText from "./FallingText";
+import FallingText, { FallingTextRef } from "./FallingText";
 import HeartFlip from "./HeartFlip";
 
 export default function BackgroundGallery() {
@@ -11,6 +11,7 @@ export default function BackgroundGallery() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const fallingRef = useRef<FallingTextRef>(null);
   const [step, setStep] = useState(0);
 
   const handleRenderStep = () => {
@@ -50,7 +51,12 @@ export default function BackgroundGallery() {
               <p className="font-carattere text-[72px] text-[#424242]">
                 Anh chúc em bé
               </p>
-              <FallingText />
+              <FallingText
+                ref={fallingRef}
+                onFinish={() => {
+                  cardRef.current!.style.pointerEvents = "auto";
+                }}
+              />
             </div>
           </>
         );
@@ -66,7 +72,10 @@ export default function BackgroundGallery() {
   };
   const handleClick = () => {
     if (!sectionRef.current || !canvasRef.current) return;
-
+    if (step === 1 && !fallingRef.current?.isFinished) {
+      console.log("Animation chưa xong, chưa cho click tiếp");
+      return;
+    }
     const fireworks = new Fireworks(canvasRef.current, {
       particles: 150,
       acceleration: 1.05,
@@ -78,7 +87,14 @@ export default function BackgroundGallery() {
       decay: { min: 0.015, max: 0.03 },
     });
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onStart: () => {
+        cardRef.current!.style.pointerEvents = "none";
+      },
+      onComplete: () => {
+        cardRef.current!.style.pointerEvents = "auto";
+      },
+    });
     if (step === 1) {
       tl.to(cardRef.current, {
         scale: 0,
@@ -153,18 +169,6 @@ export default function BackgroundGallery() {
     ["/frame_6.png", "/frame_1.png", "/frame_6.png"],
   ];
 
-  const heart = [
-    "/topleft.png",
-    "/topcenter.png",
-    "/topright.png",
-    "/midleft.png",
-    "/midcenter.png",
-    "/midright.png",
-    "/bottomleft.png",
-    "/bottomcenter.png",
-    "/bottomright.png",
-  ];
-
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
       <canvas
@@ -196,7 +200,7 @@ export default function BackgroundGallery() {
         </div>
         <div
           ref={cardRef}
-          className="absolute flex flex-col top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[940px] max-h-[566px] w-full h-full rounded-[30px] bg-gradient-to-br from-[#F9F8FE] via-[#E2E0FB] to-[#E2E0FB]  z-[2]  items-center justify-center"
+          className="absolute cursor-pointer flex flex-col top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[940px] max-h-[566px] w-full h-full rounded-[30px] bg-gradient-to-br from-[#F9F8FE] via-[#E2E0FB] to-[#E2E0FB]  z-[2]  items-center justify-center"
           onClick={handleClick}
         >
           {handleRenderStep()}
