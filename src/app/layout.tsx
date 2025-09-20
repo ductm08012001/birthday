@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sinh nhật bé Vy",
     description: "Chúc mừng sinh nhật Vy",
-    url: "https://birthday-vy.vercel.app/",
+    url: "https://birthday-nine-pi.vercel.app/",
     siteName: "Sinh nhật bé Vy",
     images: [
       {
