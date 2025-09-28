@@ -43,32 +43,23 @@ const FallingText = forwardRef<FallingTextRef, Props>(({ onFinish }, ref) => {
   }, [onFinish]);
 
   const paragraphs = [
-    `Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum,
-    nulla odio nisl vitae. In aliquet pellentesque aenean hac
-    vestibulum turpis mi bibendum diam. Tempor integer aliquam in
-    vitae malesuada fringilla.`,
-
-    `Elit nisi in eleifend sed nisi. Pulvinar at orci, proin
-    imperdiet commodo consectetur convallis risus. Sed condimentum
-    enim dignissim adipiscing faucibus consequat, urna. Viverra
-    purus et erat auctor aliquam. Risus, volutpat vulputate posuere
-    purus sit congue convallis aliquet. Arcu id augue ut feugiat
-    donec porttitor neque. Mauris, neque ultricies eu vestibulum,
-    bibendum quam lorem id. Dolor lacus, eget nunc lectus in tellus,
-    pharetra, porttitor.`,
-
-    `Ipsum sit mattis nulla quam nulla. Gravida id gravida ac enim
-    mauris id. Non pellentesque congue eget consectetur turpis.
-    Sapien, dictum molestie sem tempor. Diam elit, orci, tincidunt
-    aenean tempus. Quis velit eget ut tortor tellus. Sed vel, congue
-    felis elit erat nam nibh orci.`,
+    `Hôm  nay  là  ngày  mà  em  bé  của  anh  lớn  thêm  1  tuổi.
+     Và  cũng  là  năm  sinh  nhật  đầu  tiên  mình  có  nhau.  Cảm  ơn  em  bé  vì  đã
+     đến  với  anh,  hong  chê  anh  :>  Mặc  dù  anh  hay  làm  em  quạo,  em  bùn,  em  giận
+     nhưng  mà  em  bé  vẫn  tha  lỗi  cho  anh.  Cái  này  là  lần  đầu  tiên  anh  làm  lun,  nên  nó  sẽ  hơi  "Miền  tây"  =)))
+     hơi  sến  nhưng  mà  a  ráng  lắm  ó,  nên  em  bé  mà  chê  là  anh  nghĩ  quẩn  ó...
+     Anh  chúc  vợ  iu  tuổi  mới,  xinh  đẹp  hơn  nữa  (dù  em  quá  trời  đẹp  sẵn  òi)
+     và  ngày  càng  vui  vẻ  hơn.  Anh  sẽ  bù  đắp  lại  cho  em  bé,  những  gì  em  bé 
+     xứng  đáng  được  nhận  anh  sẽ  cố  gắng  lo  cho  em  bé.  Văn  anh  lủng  củng 
+     anh  viết  được  tới  đây  thui,  anh  snghi  cũng  lâu  dữ  lắm  mới  ra  được  nhiu 
+      đây  chữ  ó  em  bé.  Chúc  em  bé  sinh  nhật  vui  vẻ  nhoo.  Anh  thương  em  nhìu  và  cũng  yêu  em  bé  nhìuuuuu`,
   ];
 
   return (
     <div ref={containerRef} className="space-y-6">
       {paragraphs.map((para, i) => (
         <p key={i} className="text-lg text-[#475467] leading-relaxed">
-          {para.split("").map((word, j) => (
+          {para.split(" ").map((word, j) => (
             <span key={j} className="inline-block mr-0.5">
               {word}
             </span>
